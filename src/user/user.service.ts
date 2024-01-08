@@ -9,12 +9,13 @@ import { UserResponseInterface } from "@app/user/types/userResponse.interface";
 import { LoginUserDto } from "@app/user/dto/loginUser.dto";
 
 import { compareSync } from 'bcrypt';
+import { UpdateUserDto } from '@app/user/dto/updateUser.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly userRepository: Repository<UserEntity>
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
   async createUser(createUserDto: CreateUserDto): Promise<UserEntity>{
     const userByEmail = await this.userRepository.findOne({
@@ -76,5 +77,14 @@ export class UserService {
     }
     delete userByEmail.password;
     return userByEmail;
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserEntity> {
+    const user: UserEntity = await this.findUserById(userId);
+    Object.assign(user, updateUserDto);
+    return await this.userRepository.save(user);
   }
 }
