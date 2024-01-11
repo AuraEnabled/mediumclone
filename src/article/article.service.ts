@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '@app/user/user.entity';
 import { ArticleResponseInterface } from '@app/article/types/articleResponse.interface';
-import { slugify } from 'slugify';
+import slugify from 'slugify';
 
 @Injectable()
 export class ArticleService {
@@ -42,5 +42,11 @@ export class ArticleService {
       '-' +
       ((Math.random() * Math.pow(36, 6)) | 0).toString(36)
     );
+  }
+
+  async getArticleBySlug(slug: string): Promise<ArticleEntity> {
+    return this.articleRepository.findOne({
+      where: { slug: slug },
+    });
   }
 }

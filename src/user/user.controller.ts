@@ -2,11 +2,12 @@ import {
   Body,
   Controller,
   Get,
-  Post, Put,
+  Post,
+  Put,
   Req,
   UseGuards,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from '@app/user/user.service';
 import { CreateUserDto } from '@app/user/dto/createUser.dto';
