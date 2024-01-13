@@ -1,5 +1,5 @@
-import { UserEntity } from '@app/user/user.entity';
+import { ProfileType } from '@app/profile/types/profile.type';
 
 export interface ProfileResponseInterface {
-  profile: UserEntity;
+  profile: ProfileType;
 }
