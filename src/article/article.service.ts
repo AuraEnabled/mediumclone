@@ -118,8 +118,6 @@ export class ArticleService {
       relations: ['favorites'],
     });
 
-    console.log('user', user);
-
     const isNotFavorited =
       user.favorites.findIndex(
         (articleInFavorites) => articleInFavorites.id === article.id,
